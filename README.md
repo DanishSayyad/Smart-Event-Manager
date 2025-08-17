@@ -23,7 +23,6 @@ A comprehensive command-line event management system built in Python that allows
 - **Automatic Notifications**: Send reminder emails to all attendees
 
 ### 📧 **Mail System**
-- **Automated Reminders**: Send event reminders to attendees
 - **Mail Viewing**: Check received mails in the system
 - **Professional Templates**: Well-formatted reminder emails
 

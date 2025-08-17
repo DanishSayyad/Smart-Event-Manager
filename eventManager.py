@@ -160,6 +160,7 @@ class EventManager:
                 del self.events[i]
                 self.updateEvents()
                 print(f"Event with ID {event_id} deleted successfully.")
+                self.updateTimeline()
                 return
         print(f"Event with ID {event_id} not found")
 
@@ -356,8 +357,16 @@ class EventManager:
                                 except ValueError:
                                     print("Invalid time format. Please use HH:MM.")
 
+                        ids = []
+                        for ev in self.events:
+                            ids.append(ev.event_id)
                         # Generate new event ID (simply using count+1)
-                        event_id = f"E{len(self.events)+1}"
+                        i = 1
+                        while(True):
+                            event_id = f"E{len(self.events)+i}"
+                            if event_id not in ids:
+                                break
+                            i = i + 1
 
                         # Create and add event
                         new_event = Event(event_id, name, date, time, duration, event_type, location)
