@@ -1,5 +1,7 @@
 import os
 import platform
+import pandas as pd
+from datetime import datetime, timedelta
 
 # Initial menu
 def welcome():
@@ -30,6 +32,12 @@ def userMenu():
     print("3. Refresh Events")
     print("4. Account Setting")
     print("5. Logout")
+
+# Attendee menu
+def attendeeMenu():
+    print("1. Add attendee")
+    print("2. Remove attendee")
+    print("3. Stop")
 
 # Clears the screen on any OS
 def clearScreen():
@@ -69,3 +77,22 @@ def no_spaces(prompt="Enter username: "):
             print("Username cannot contain spaces or be blank. Please try again.")
         else:
             return username
+
+
+# Returns True if date_str is a valid date and is today or in the future.
+def validDate(date_str, date_format="%d/%m/%Y"):
+    try:
+        input_date = datetime.strptime(date_str, date_format).date()
+        today = datetime.today().date()
+        return input_date >= today
+    except ValueError:
+        return False
+
+# Returns True if time_str is ahead of current system time (today).
+def futureTime(time_str, time_format="%H:%M"):
+    try:
+        input_time = datetime.strptime(time_str, time_format).time()
+        now_time = datetime.now().time()
+        return input_time > now_time
+    except ValueError:
+        return False
