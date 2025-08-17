@@ -17,14 +17,18 @@ def main():
         choice = takeChoice()
         match(choice):
             case 1:
-                if(manager.login()):
+                if manager.login():
                     manager.session()
                 else:
                     print("Invalid credentials, press Enter to try again")
                     input()
             case 2:
-                # signup()
-                pass
+                if manager.signup():
+                    print("User created successfully! Press Enter to continue...")
+                    input()
+                else:
+                    print("User already exists... Press Enter to continue.")
+                    input()
             case 3:
                 break
             case _:

@@ -1,5 +1,4 @@
 from creds import *
-from utils import clearScreen
 
 class Event:
     def __init__(self, event_id=0, name=None, date=None, time=None, event_type=None, location=None):
@@ -38,5 +37,24 @@ class EventManager:
         
         return False
     
+    def signup(self):
+        clearScreen()
+        print("User Sign Up")
+        info = takeInfo()
+
+        # Check for existing username or email
+        exists = (
+            (self.userData["username"] == info["username"]) |
+            (self.userData["email"] == info["email"])
+        )
+        
+        if self.userData[exists].shape[0] > 0:
+            return False
+        
+        new_row = pd.DataFrame([info])
+        self.userData = pd.concat([self.userData, new_row], ignore_index=True)
+        self.userData.to_csv("data/users.csv", index=False)
+        return True
+
     def session(self):
         print("Reached session")

@@ -1,4 +1,5 @@
 import pandas as pd
+from utils import *
 
 # Loads the user data from csv
 def userLoad():
@@ -10,6 +11,20 @@ def takeCreds():
     username = input("Enter username: ").strip()
     password = input("Enter password: ").strip()
     return {"username": username, "password": password}
+
+def takeInfo():
+    name = get_non_blank("Enter name: ")
+    username = no_spaces("Enter username: ")
+    email = get_non_blank("Enter email: ")
+    password = get_non_blank("Enter password: ")
+    admin = ask("Are you an admin? (y/n): ")
+    return {
+        "name": name,
+        "username": username,
+        "email": email,
+        "password": password,
+        "admin": int(admin)
+    }
 
 # Verifies username and password
 def userLook(creds, userData):
