@@ -1,6 +1,36 @@
 import os
 import platform
 
+# Initial menu
+def welcome():
+    clearScreen()
+    print("--- Smart Event Manager ---")
+    print("1. Login")
+    print("2. Signup")
+    print("3. Exit")
+
+# Admin menu
+def adminMenu():
+    clearScreen()
+    print("1. Add Event")
+    print("2. Display All Events")
+    print("3. View Events")
+    print("4. Edit Event")
+    print("5. Delete Event")
+    print("6. Search Event")
+    print("7. Remind Attendees")
+    print("8. Account Setting")
+    print("9. Logout")
+
+# User menu
+def userMenu():
+    clearScreen()
+    print("1. View Events")
+    print("2. View All Events")
+    print("3. Refresh Events")
+    print("4. Account Setting")
+    print("5. Logout")
+
 # Clears the screen on any OS
 def clearScreen():
     if platform.system() == "Windows":
@@ -17,7 +47,7 @@ def takeChoice():
 
 # Yes or No question
 def ask(question):
-    while(True):
+    while True:
         answer = input(question).lower()
         if answer not in ('y', 'n'):
             continue

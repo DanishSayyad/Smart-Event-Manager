@@ -1,6 +1,14 @@
 import pandas as pd
 from utils import *
 
+class User:
+    def __init__(self, name, username, email, password, admin):
+        self.name = name
+        self.username = username
+        self.email = email
+        self.password = password
+        self.admin = admin == 1
+
 # Loads the user data from csv
 def userLoad():
     return pd.read_csv("data/users.csv")
