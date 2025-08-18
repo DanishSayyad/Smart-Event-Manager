@@ -257,12 +257,12 @@ class EventManager:
                                 print("Username not found.")
                         elif choice2 == 3:
                             if not attendees_list:
-                                print("⚠️ Attendees must be added!")
+                                print("Attendees must be added!")
                                 continue
                             event.attendees = attendees_list
                             break
                         else:
-                            print("⚠️ Invalid choice.")
+                            print("Invalid choice.")
 
                 case 8:
                     print("Event updated successfully.")
