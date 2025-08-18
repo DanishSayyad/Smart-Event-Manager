@@ -22,7 +22,8 @@ def adminMenu():
     print("6. Search Event")
     print("7. Remind Attendees")
     print("8. Check Mails")
-    print("9. Logout")
+    print("9. Clear Mails")
+    print("10. Logout")
 
 # User menu
 def userMenu():
@@ -31,7 +32,8 @@ def userMenu():
     print("2. View All Events")
     print("3. Refresh Events")
     print("4. Check Mails")
-    print("5. Logout")
+    print("5. Clear Mails")
+    print("6. Logout")
 
 # Attendee menu
 def attendeeMenu():
@@ -109,6 +111,7 @@ def getDuration():
         except ValueError:
             print("Duration must be an integer.")
 
+# Validates time
 def validTime(time_str):
     try:
         datetime.strptime(time_str.strip(), "%H:%M")

@@ -38,6 +38,7 @@ class EventManager:
         
         return False
     
+    # Creates a new user
     def signup(self):
         clearScreen()
         print("User Sign Up")
@@ -57,6 +58,7 @@ class EventManager:
         self.userData.to_csv("data/users.csv", index=False)
         return True
     
+    # returns all events regarding either the admin or normal user
     def fillEvents(self, admin=1):
         eventData = eventLoad()
         if not admin:
@@ -303,6 +305,7 @@ class EventManager:
             )
     )
 
+    # User session
     def session(self):
         if self.user.admin:
             while True:
@@ -469,17 +472,27 @@ class EventManager:
                     case 7:
                         clearScreen()
                         self.remindUsers()
+                        print("Users reminded")
                         input("\nPress Enter to continue...")
                         pass
 
                     case 8:
-                        mail = getMails(self.user.email)
-                        for m in mail:
+                        for m in self.mails:
                             m.displayMail()
                         
                         input("\nPress Enter to continue...")
 
                     case 9:
+                        clearScreen()
+                        sure = ask("Clear all mails? (y/n): ")
+                        if sure:
+                            self.clearMails()
+                            print("Mails cleared!")
+                        else:
+                            print("Aborted")
+                        input("Press Enter to continue...")
+
+                    case 10:
                         break;
 
                     case _:
@@ -530,13 +543,22 @@ class EventManager:
                         self.events = self.fillEvents(0)
 
                     case 4:
-                        mail = getMails(self.user.email)
-                        for m in mail:
+                        for m in self.mails:
                             m.displayMail()
                         
                         input("\nPress Enter to continue...")
 
                     case 5:
+                        clearScreen()
+                        sure = ask("Clear all mails? (y/n): ")
+                        if sure:
+                            self.clearMails()
+                            print("Mails cleared!")
+                        else:
+                            print("Aborted")
+                        input("Press Enter to continue...")
+
+                    case 6:
                         break
 
                     case _:
@@ -628,6 +650,14 @@ class EventManager:
         if new_mails:
             m = pd.concat([m, pd.DataFrame(new_mails)], ignore_index=True)
             m.to_csv("data/mails.csv", index=False)
-            print(f"{len(new_mails)} reminder mails saved.")
-        else:
-            print("No new mails generated.")
+
+    def clearMails(self):
+        file_path = "data/mails.csv"
+        m = pd.read_csv(file_path)
+        user_email = self.user.email
+
+        # Keep only mails NOT belonging to the current user
+        m = m[m["to"] != user_email]
+        m.to_csv(file_path, index=False)
+
+        self.mails = []
