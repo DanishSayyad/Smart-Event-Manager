@@ -21,7 +21,7 @@ def adminMenu():
     print("5. Delete Event")
     print("6. Search Event")
     print("7. Remind Attendees")
-    print("8. Account Setting")
+    print("8. Check Mails")
     print("9. Logout")
 
 # User menu
@@ -30,7 +30,7 @@ def userMenu():
     print("1. View Events")
     print("2. View All Events")
     print("3. Refresh Events")
-    print("4. Account Setting")
+    print("4. Check Mails")
     print("5. Logout")
 
 # Attendee menu
@@ -96,3 +96,29 @@ def futureTime(time_str, time_format="%H:%M"):
         return input_time > now_time
     except ValueError:
         return False
+
+def getDuration():
+    while True:
+        duration_str = get_non_blank("Enter event duration (in hours): ")
+        try:
+            duration = int(duration_str)
+            if duration > 0:
+                return duration
+            else:
+                print("Duration must be a positive integer.")
+        except ValueError:
+            print("Duration must be an integer.")
+
+def validTime(time_str):
+    try:
+        datetime.strptime(time_str.strip(), "%H:%M")
+        return True
+    except ValueError:
+        return False
+
+def get_time(prompt="Enter time (HH:MM): "):
+    while True:
+        t = get_non_blank(prompt)
+        if validTime(t):
+            return t
+        print("Invalid time. Use HH:MM (24-hour).")
